@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Camera } from "lucide-react";
-import { MENU, SLOTS, TAGS, type SlotId, type MenuCategory } from "@/lib/data";
+import { MENU, SITE, SLOTS, TAGS, type SlotId, type MenuCategory } from "@/lib/data";
+import { dishByName } from "@/lib/dishes";
 
 /** 取得 Asia/Taipei 目前時間（以午夜起算的分鐘數） */
 function taipeiMinutes(date: Date): number {
@@ -108,42 +110,72 @@ export default function TimeSlotMenu() {
                 cat.id === "drinks" ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"
               }`}
             >
-              {cat.items.map((item) => (
-                <li
-                  key={item.name}
-                  className="overflow-hidden rounded border border-brand/10 bg-paper"
-                >
-                  {/* 餐點照片佔位（4:3）。換成實拍照請見 README「更換餐點照片」 */}
-                  <div
-                    className="flex aspect-[4/3] items-center justify-center bg-oat text-ink-soft/60"
-                    aria-hidden="true"
+              {cat.items.map((item) => {
+                const dish = dishByName(item.name);
+                return (
+                  <li
+                    key={item.name}
+                    className="flex flex-col overflow-hidden rounded border border-brand/10 bg-paper"
                   >
-                    <Camera className="h-6 w-6" />
-                  </div>
-                  <div className="p-2.5">
-                    <p className="text-sm font-bold leading-snug">{item.name}</p>
-                    <p className="mt-1 font-num text-base font-bold tabular-nums text-accent">
-                      ${item.price}
-                    </p>
-                    {item.tags && (
-                      <div className="mt-1.5 flex flex-wrap gap-1">
-                        {item.tags.map((t) => (
-                          <span
-                            key={t}
-                            className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${
-                              TAGS[t].tone === "leaf"
-                                ? "bg-leaf-soft text-leaf"
-                                : "bg-brand/10 text-brand"
-                            }`}
+                    {/* 餐點照片佔位（4:3）。換成實拍照請見 README「更換餐點照片」 */}
+                    <div
+                      className="flex aspect-[4/3] items-center justify-center bg-oat text-ink-soft/60"
+                      aria-hidden="true"
+                    >
+                      <Camera className="h-6 w-6" />
+                    </div>
+                    <div className="flex flex-1 flex-col p-2.5">
+                      {dish ? (
+                        <Link
+                          href={`/menu/${dish.slug}`}
+                          className="text-sm font-bold leading-snug hover:text-brand hover:underline"
+                        >
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <p className="text-sm font-bold leading-snug">{item.name}</p>
+                      )}
+                      <p className="mt-1 font-num text-base font-bold tabular-nums text-accent">
+                        ${item.price}
+                      </p>
+                      {item.tags && (
+                        <div className="mt-1.5 flex flex-wrap gap-1">
+                          {item.tags.map((t) => (
+                            <span
+                              key={t}
+                              className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${
+                                TAGS[t].tone === "leaf"
+                                  ? "bg-leaf-soft text-leaf"
+                                  : "bg-brand/10 text-brand"
+                              }`}
+                            >
+                              {TAGS[t].label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {dish && (
+                        <div className="mt-auto pt-2.5">
+                          <Link
+                            href={`/menu/${dish.slug}`}
+                            className="block text-xs text-ink-soft underline underline-offset-2 hover:text-brand"
                           >
-                            {TAGS[t].label}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </li>
-              ))}
+                            詳細介紹
+                          </Link>
+                          <a
+                            href={SITE.lineUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-1.5 block rounded bg-accent px-2 py-1.5 text-center text-xs font-bold text-white hover:bg-accent-dark"
+                          >
+                            直接點餐
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
 
             {cat.addons && (

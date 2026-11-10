@@ -24,7 +24,7 @@ export const SITE = {
     "雙連捷運站 2 號出口步行 4 分鐘",
     "馬偕紀念醫院旁步行 3 分鐘",
   ],
-  lineUrl: "https://lin.ee/nyhwjIO",
+  lineUrl: "https://lin.ee/xAdQuww",
   instagramUrl: "https://www.instagram.com/comer.food.factory/",
   priceRange: "$$",
   // TODO(待確認)：以下為雙連街55號附近的概略座標，請以 Google Maps 校正後更新。

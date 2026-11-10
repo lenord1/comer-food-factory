@@ -17,6 +17,7 @@ import {
   Building2,
   Coffee,
 } from "lucide-react";
+import PageShell from "@/components/PageShell";
 import TimeSlotMenu from "@/components/TimeSlotMenu";
 import InstagramIcon from "@/components/InstagramIcon";
 import { BUSINESS_POINTS, FAQ, OPENING_HOURS, QUICK_STEPS, SITE } from "@/lib/data";
@@ -27,40 +28,7 @@ const sectionTitle = "font-serif text-2xl font-bold text-brand md:text-3xl";
 
 export default function Home() {
   return (
-    <div className="mobile-bar-space">
-      {/* 1. Sticky 導覽列 */}
-      <header className="sticky top-0 z-40 border-b border-brand/10 bg-paper/95 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4">
-          <a href="#top" className="flex min-w-0 items-center gap-2">
-            <Image
-              src="/logo.jpg"
-              alt={`${SITE.nameZh} Logo`}
-              width={36}
-              height={36}
-              className="h-9 w-9 shrink-0"
-              priority
-            />
-            <span className="truncate font-serif text-base font-bold text-brand">
-              {SITE.nameZh}
-            </span>
-          </a>
-          <nav className="hidden items-center gap-6 text-sm md:flex" aria-label="主選單">
-            <a href="#menu" className="hover:text-brand">時段菜單</a>
-            <a href="#business" className="hover:text-brand">商務會議餐盒</a>
-            <a href="#quick" className="hover:text-brand">外帶外送</a>
-            <a href="#store" className="hover:text-brand">門市交通</a>
-          </nav>
-          <a
-            href={SITE.lineUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 rounded bg-accent px-3 py-2 text-sm font-bold text-white hover:bg-accent-dark"
-          >
-            線上點餐 / 會議團訂
-          </a>
-        </div>
-      </header>
-
+    <PageShell>
       <main id="top">
         {/* 2. 首屏 Hero */}
         <section className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 md:grid-cols-[1fr_auto] md:py-16">
@@ -300,37 +268,6 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-brand/10 bg-oat px-4 py-6 text-center text-xs text-ink-soft">
-        © {new Date().getFullYear()} {SITE.fullName}
-      </footer>
-
-      {/* 7. 手機常駐底部轉換列 */}
-      <div className="mobile-bar fixed inset-x-0 bottom-0 z-50 border-t border-brand/15 bg-paper md:hidden">
-        <div className="grid grid-cols-2 gap-2 p-2">
-          <a
-            href={SITE.phoneHref}
-            className="flex flex-col items-center justify-center rounded border border-brand bg-paper px-2 py-2 text-center text-xs font-bold text-brand"
-          >
-            <span className="inline-flex items-center gap-1">
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              電話訂餐
-            </span>
-            <span className="font-num tabular-nums">({SITE.phoneDisplay})</span>
-          </a>
-          <a
-            href={SITE.lineUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col items-center justify-center rounded bg-accent px-2 py-2 text-center text-xs font-bold text-white"
-          >
-            <span className="inline-flex items-center gap-1">
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              官方 LINE 快速訂餐
-            </span>
-            <span>團訂諮詢</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    </PageShell>
   );
 }

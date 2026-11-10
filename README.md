@@ -18,6 +18,15 @@ npm run lint
 所有店家資料、菜單、價格、連結、FAQ 都在 `lib/data.ts`，修改後重新部署即可。
 色票在 `tailwind.config.ts`（`brand`、`paper`、`oat`、`accent`、`ink`、`leaf`），元件只使用色票名稱。
 
+## 菜色詳細頁（SEO / AEO）
+
+- 13 道餐點的資料在 `lib/dishes.ts`；價格從 `lib/data.ts` 的 `MENU` 自動取得，改價格只要改 `MENU`。
+- 詳細頁：`/menu/[slug]`（`app/menu/[slug]/page.tsx`），以 `generateStaticParams` 靜態預先生成，`dynamicParams = false`。
+- 菜單總表：`/menu`；`/sitemap.xml` 與 `/robots.txt` 由 `app/sitemap.ts`、`app/robots.ts` 產生。
+- 每頁含 `Product`（offers）、`FAQPage`、`BreadcrumbList` 結構化資料。Product 的 `image` 目前是 Logo，有實拍照後請在該頁改成餐點照片網址。
+- 「下載團訂菜單」連到 `public/menu.jpg`（店家提供的菜單圖）。若有 PDF 版本，放進 `public/` 並修改該連結。
+- 新增餐點：在 `MENU` 加品項，再在 `lib/dishes.ts` 的 `SEEDS` 加一筆（slug 使用英文小寫與連字號）。
+
 ## 更換餐點照片
 
 目前菜單卡片使用 4:3 佔位區塊（`components/TimeSlotMenu.tsx`）。換成實拍照的步驟：
