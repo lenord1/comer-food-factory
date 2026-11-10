@@ -73,11 +73,15 @@ export default async function DishPage({ params }: Props) {
   const isBento = dish.category === "bento";
 
   const answerRows: { label: string; value: string }[] = [
-    { label: "價格", value: `$${dish.price}（${dish.categoryLabel}均一價）` },
+    {
+      label: "價格",
+      value: `$${dish.price}（${isBento ? "會議餐盒" : dish.categoryLabel}均一價）`,
+    },
     {
       label: "取餐時段",
       value: `${dish.timeLabel}${dish.timeNote ? `（${dish.timeNote}）` : ""}`,
     },
+    { label: "主打", value: dish.highlight },
     { label: "風味特色", value: dish.flavor },
     {
       label: "葷素",
@@ -192,11 +196,7 @@ export default async function DishPage({ params }: Props) {
               <h2 id="quick-answer" className="font-serif text-lg font-bold text-brand">
                 重點速答
               </h2>
-              <p className="mt-2 leading-relaxed">
-                摳門製研所的「{dish.name}」{dish.categoryLabel}均一價 ${dish.price}，
-                {dish.timeLabel}供應。店址在台北市大同區雙連街55號，雙連捷運站 2 號出口步行約 4
-                分鐘、馬偕紀念醫院旁步行約 3 分鐘。
-              </p>
+              <p className="mt-2 leading-relaxed">{dish.answerLead}</p>
               <dl className="mt-4 divide-y divide-brand/10 text-sm">
                 {answerRows.map((r) => (
                   <div key={r.label} className="grid grid-cols-[5rem_1fr] gap-3 py-2.5">

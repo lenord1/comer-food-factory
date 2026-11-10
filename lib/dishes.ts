@@ -22,6 +22,10 @@ export type Dish = {
   timeLabel: string;
   timeNote?: string;
   description: string;
+  /** 重點速答第一段（一句話直接回答價格、時段、地點） */
+  answerLead: string;
+  /** 重點速答「主打」一行（品類定位） */
+  highlight: string;
   /** 風味特色（一句話，供直接解答卡片使用） */
   flavor: string;
   /** 食材特點（取自品名） */
@@ -133,7 +137,7 @@ function build(seed: Seed): Dish {
     ];
   } else if (category === "onigiri") {
     seoTitle = `${name}｜$${price} 馬偕醫院外帶早餐・雙連站拿了就走｜摳門製研所`;
-    seoDescription = `${name}均一價 $${price}，${timeLabel}供應（午後最晚至 16:30）。雙連街55號、馬偕醫院旁，外帶拿了就走，官方 LINE 預先點餐免排隊，也適合會議點心餐盒。`;
+    seoDescription = `${name}均一價 $${price}，${timeLabel}供應（午後最晚至 16:30）。早餐、下午茶首選，帶了就走、方便快速。雙連街55號、馬偕醫院旁，官方 LINE 預先點餐免排隊，也適合會議點心餐盒。`;
     faqs = [
       seed.faq,
       {
@@ -161,6 +165,21 @@ function build(seed: Seed): Dish {
     ];
   }
 
+  const address = "台北市大同區雙連街55號，雙連捷運站 2 號出口步行約 4 分鐘、馬偕紀念醫院旁步行約 3 分鐘";
+  let answerLead: string;
+  let highlight: string;
+  if (category === "bento") {
+    answerLead = `摳門製研所的「${name}」是會議餐盒，御食餐盒均一價 $${price}，${timeLabel}供應。店址在${address}。`;
+    highlight = "台北會議餐盒首選，均一價好請款，可開立收據／發票";
+  } else if (category === "onigiri") {
+    answerLead = `摳門製研所的「${name}」是三角御結，均一價 $${price}，適合當早餐、下午茶，${timeLabel}供應，帶了就走、方便快速。店址在${address}。`;
+    highlight = "歸類在早餐、下午茶，主打「帶了就走、方便快速」";
+  } else {
+    answerLead = `摳門製研所的「${name}」是日式炒麵，均一價 $${price}，${timeLabel}供應。店址在${address}。`;
+    highlight =
+      "不是用米飯當主食，因為我們的炒麵「很。好。吃」，也給大家不同的便當主食選擇";
+  }
+
   const description = `${name}是摳門製研所的${label}。${seed.flavor}均一價 $${price}，${timeLabel}供應，店址在台北市大同區雙連街55號，雙連捷運站 2 號出口步行約 4 分鐘、馬偕紀念醫院旁步行約 3 分鐘。`;
 
   return {
@@ -173,6 +192,8 @@ function build(seed: Seed): Dish {
     timeLabel,
     timeNote,
     description,
+    answerLead,
+    highlight,
     flavor: seed.flavor,
     features: seed.features,
     proteinLabel: seed.proteinLabel,
@@ -241,14 +262,14 @@ const SEEDS: Seed[] = [
     slug: "vegetarian-patty-bento",
     name: "日式烤素排御食盒",
     category: "bento",
-    flavor: "以日式烤素排為主角的素食友善餐盒，開會時可兼顧素食同事。",
-    features: ["日式烤素排", "素食友善", "御食餐盒"],
+    flavor: "素食款為鍋邊素，是會議餐盒裡兼顧素食同事的選擇。",
+    features: ["鍋邊素", "素食友善", "御食餐盒"],
     proteinLabel: "素食",
     isVegetarian: true,
     vegetarianLabel: "素食友善",
     faq: {
       q: "日式烤素排御食盒是素食嗎？是全素嗎？",
-      a: "菜單標示為「素食友善」。實際素別（例如是否全素、是否含蛋奶或五辛）請在訂購前來電或 LINE 向店家確認。",
+      a: "150 元的素食會議餐盒為鍋邊素，菜單標示為「素食友善」。實際素別（例如是否全素、是否含蛋奶或五辛）請在訂購前來電或 LINE 向店家確認。",
     },
   },
 
