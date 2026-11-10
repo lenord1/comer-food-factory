@@ -11,7 +11,7 @@ export default function DeliveryTiers() {
         <thead>
           <tr className="border-b border-brand/15 text-left text-ink-soft">
             <th scope="col" className="py-2 font-medium">與門市距離</th>
-            <th scope="col" className="py-2 text-right font-medium">訂購滿額即可外送</th>
+            <th scope="col" className="py-2 text-right font-medium">滿額即可外送・免運費</th>
           </tr>
         </thead>
         <tbody>

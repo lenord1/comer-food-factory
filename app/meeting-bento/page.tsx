@@ -11,7 +11,7 @@ import { DISHES, DRINK_PAIRINGS } from "@/lib/dishes";
 const PATH = "/meeting-bento";
 const title = "台北會議餐盒推薦｜$150 均一價、可開發票、前一天預約外送｜摳門製研所 雙連站";
 const description =
-  "雙連站、馬偕醫院旁的日式會議餐盒，5 款均一價 $150（含鍋邊素），可開收據／發票。外送需前一天預約，1 公里內滿 $1,000 即可外送，官方 LINE 團訂。";
+  "雙連站、馬偕醫院旁的日式會議餐盒，5 款均一價 $150（含鍋邊素），可開收據／發票。外送需前一天預約，1 公里內滿 $1,000 即可外送、達門檻免運費，官方 LINE 團訂。";
 
 export const metadata: Metadata = {
   title,
@@ -56,7 +56,7 @@ const STEPS = [
 const MEETING_FAQ = [
   {
     q: "會議餐盒最少要訂幾個才能外送？",
-    a: `外送以訂購金額計算門檻。只訂 $${PRICE} 餐盒的話，1 公里內約 7 個（$${(7 * PRICE).toLocaleString("en-US")}）即可外送；距離越遠門檻越高，5 公里以上需滿 $2,500。`,
+    a: `外送以訂購金額計算門檻。只訂 $${PRICE} 餐盒的話，1 公里內約 7 個（$${(7 * PRICE).toLocaleString("en-US")}）即可外送；距離越遠門檻越高，5 公里以上需滿 $2,500；達門檻免運費。`,
   },
   ...FAQ,
 ];
@@ -143,7 +143,7 @@ export default function MeetingBentoPage() {
             </h1>
             <p className="mt-3 leading-relaxed">
               摳門製研所的會議餐盒 5 款均一價 ${PRICE}，含 1 款鍋邊素，可開立收據／發票。店在雙連捷運站 2
-              號出口步行約 4 分鐘、馬偕紀念醫院旁。外送需前一天預約，1 公里內滿 $1,000 即可外送。
+              號出口步行約 4 分鐘、馬偕紀念醫院旁。外送需前一天預約，1 公里內滿 $1,000 即可外送，達門檻免運費。
             </p>
 
             <section aria-labelledby="quick" className="mt-5 rounded border border-brand/30 bg-white/70 p-5">
@@ -222,7 +222,7 @@ export default function MeetingBentoPage() {
         </section>
 
         <section aria-labelledby="delivery" className="mt-12">
-          <h2 id="delivery" className="font-serif text-2xl font-bold text-brand">外送門檻與費用試算</h2>
+          <h2 id="delivery" className="font-serif text-2xl font-bold text-brand">外送門檻與費用試算（達門檻免運）</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             <DeliveryTiers />
             <div className={card}>
