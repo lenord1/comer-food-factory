@@ -5,7 +5,7 @@
  * 內容原則：只寫菜單上看得到的資訊（品名、價格、時段、素食標示），
  * 不編造食材來源、熱量、份量或過敏原保證；不確定的事一律請客人來電或 LINE 確認。
  */
-import { MENU, SITE, SLOTS, type SlotId } from "@/lib/data";
+import { MENU, SITE, SLOTS, photoFor, type SlotId } from "@/lib/data";
 
 export type DishCategoryId = "bento" | "onigiri" | "yakisoba";
 
@@ -31,6 +31,8 @@ export type Dish = {
   isVegetarian: boolean;
   vegetarianLabel?: string;
   suitableFor: string[];
+  /** 示意照片路徑；素食品項沒有（代表照為葷食） */
+  photo?: string;
   addons?: { name: string; price: number }[];
   faqs: Faq[];
   seoTitle: string;
@@ -75,10 +77,16 @@ const CATEGORY_SUITABLE: Record<DishCategoryId, string[]> = {
 };
 
 /** 從 MENU 取價格；找不到就丟錯，避免詳細頁與菜單價格不一致。 */
+function menuEntry(name: string) {
+  for (const cat of MENU) {
+    const item = cat.items.find((i) => i.name === name);
+    if (item) return { cat, item };
+  }
+  throw new Error(`MENU 找不到餐點：${name}`);
+}
+
 function priceOf(name: string): number {
-  const found = MENU.flatMap((c) => c.items).find((i) => i.name === name);
-  if (!found) throw new Error(`MENU 找不到餐點：${name}`);
-  return found.price;
+  return menuEntry(name).item.price;
 }
 
 function timeLabelOf(slots: SlotId[]): string {
@@ -98,7 +106,8 @@ const DELIVERY_FAQ_ANSWER =
 function build(seed: Seed): Dish {
   const { category, name } = seed;
   const label = CATEGORY_LABEL[category];
-  const price = priceOf(name);
+  const { cat: menuCat, item: menuItem } = menuEntry(name);
+  const price = menuItem.price;
   const timeSlots = CATEGORY_SLOTS[category];
   const timeLabel = timeLabelOf(timeSlots);
   const addons = addonsOf(category);
@@ -170,6 +179,7 @@ function build(seed: Seed): Dish {
     isVegetarian: Boolean(seed.isVegetarian),
     vegetarianLabel: seed.vegetarianLabel,
     suitableFor: CATEGORY_SUITABLE[category],
+    photo: photoFor(menuCat.id, menuItem),
     addons,
     faqs,
     seoTitle,

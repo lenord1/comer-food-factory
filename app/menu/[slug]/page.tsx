@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -95,8 +96,8 @@ export default async function DishPage({ params }: Props) {
         "@id": `${pageUrl}#product`,
         name: dish.name,
         description: dish.description,
-        // 目前沒有實拍照，暫以品牌 Logo 作為圖片。有實拍照後請改成餐點照片網址。
-        image: [`${SITE.siteUrl}/logo.jpg`],
+        // 有示意照片用示意照片；素食品項沒有照片，暫以品牌 Logo 代替。
+        image: [dish.photo ? `${SITE.siteUrl}${dish.photo}` : `${SITE.siteUrl}/logo.jpg`],
         category: dish.categoryLabel,
         url: pageUrl,
         brand: { "@type": "Brand", name: SITE.nameZh },
@@ -248,17 +249,35 @@ export default async function DishPage({ params }: Props) {
             </div>
           </div>
 
-          {/* 餐點照片佔位（4:3）。換成實拍照請見 README */}
-          <div
-            className="flex aspect-[4/3] items-center justify-center rounded border border-brand/15 bg-oat text-ink-soft/60 md:aspect-square"
-            role="img"
-            aria-label={`${dish.name}照片準備中`}
-          >
-            <div className="text-center text-sm">
-              <Camera className="mx-auto h-8 w-8" aria-hidden="true" />
-              <p className="mt-2">實拍照片準備中</p>
+          {/* 餐點示意照片（取自店家 DM）；素食品項沒有照片，顯示佔位 */}
+          {dish.photo ? (
+            <figure>
+              <div className="relative aspect-[4/3] overflow-hidden rounded border border-brand/15 bg-oat md:aspect-square">
+                <Image
+                  src={dish.photo}
+                  alt={`${dish.name}示意圖`}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 20rem, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-1.5 text-xs text-ink-soft">
+                照片為同類餐點示意，實際以現場供應為準
+              </figcaption>
+            </figure>
+          ) : (
+            <div
+              className="flex aspect-[4/3] items-center justify-center rounded border border-brand/15 bg-oat text-ink-soft/60 md:aspect-square"
+              role="img"
+              aria-label={`${dish.name}照片準備中`}
+            >
+              <div className="text-center text-sm">
+                <Camera className="mx-auto h-8 w-8" aria-hidden="true" />
+                <p className="mt-2">實拍照片準備中</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* 詳細規格 Bento Box */}

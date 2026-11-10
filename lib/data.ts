@@ -127,6 +127,29 @@ export const MENU: MenuCategory[] = [
   },
 ];
 
+// ───── 餐點照片 ─────
+// 照片取自店家 DM（菜單）。DM 只有每個品類的代表照，所以：
+// - 御結、炒麵、餐盒：同品類共用一張示意圖；
+// - 素食品項不使用（代表照是葷食，避免誤導）；
+// - 飲品只有桂花烏龍與復刻紅茶有照片。
+// 之後有各品項實拍照，直接在這裡對應品名即可。
+const CATEGORY_PHOTO: Partial<Record<MenuCategory["id"], string>> = {
+  onigiri: "/menu/onigiri.jpg",
+  noodle: "/menu/yakisoba.jpg",
+  bento: "/menu/bento.jpg",
+};
+
+const DRINK_PHOTO: Record<string, string> = {
+  "桂花烏龍（無糖）": "/menu/drink-osmanthus-oolong.jpg",
+  復刻紅茶: "/menu/drink-classic-black-tea.jpg",
+};
+
+export function photoFor(categoryId: MenuCategory["id"], item: MenuItem): string | undefined {
+  if (categoryId === "drinks") return DRINK_PHOTO[item.name];
+  if (item.tags?.includes("vegan") || item.tags?.includes("veg-friendly")) return undefined;
+  return CATEGORY_PHOTO[categoryId];
+}
+
 export type SlotId = "morning" | "noon" | "afternoon";
 
 export type TimeSlot = {

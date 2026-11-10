@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Camera } from "lucide-react";
-import { MENU, SITE, SLOTS, TAGS, type SlotId, type MenuCategory } from "@/lib/data";
+import { MENU, SITE, SLOTS, TAGS, photoFor, type SlotId, type MenuCategory } from "@/lib/data";
 import { dishByName } from "@/lib/dishes";
 
 /** 取得 Asia/Taipei 目前時間（以午夜起算的分鐘數） */
@@ -112,18 +113,31 @@ export default function TimeSlotMenu() {
             >
               {cat.items.map((item) => {
                 const dish = dishByName(item.name);
+                const photo = photoFor(cat.id, item);
                 return (
                   <li
                     key={item.name}
                     className="flex flex-col overflow-hidden rounded border border-brand/10 bg-paper"
                   >
-                    {/* 餐點照片佔位（4:3）。換成實拍照請見 README「更換餐點照片」 */}
-                    <div
-                      className="flex aspect-[4/3] items-center justify-center bg-oat text-ink-soft/60"
-                      aria-hidden="true"
-                    >
-                      <Camera className="h-6 w-6" />
-                    </div>
+                    {photo ? (
+                      <div className="relative aspect-[4/3] bg-oat">
+                        <Image
+                          src={photo}
+                          alt={`${item.name}示意圖`}
+                          fill
+                          sizes="(min-width: 768px) 25vw, 50vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      /* 沒有照片的品項：4:3 佔位 */
+                      <div
+                        className="flex aspect-[4/3] items-center justify-center bg-oat text-ink-soft/60"
+                        aria-hidden="true"
+                      >
+                        <Camera className="h-6 w-6" />
+                      </div>
+                    )}
                     <div className="flex flex-1 flex-col p-2.5">
                       {dish ? (
                         <Link
