@@ -39,7 +39,7 @@ export const SITE = {
   // 品牌理念：每行一句，網站以換行顯示（與 Instagram 簡介一致）
   philosophy:
     "comer，西班牙語的「吃」\n摳門，是老闆們對自己嚴謹的初心\n秉持著「對自己摳門，但對客人大方」的態度\n服務每一位摳門的人們",
-  heroTitle: "雙連街日式職人手作｜馬偕醫院旁上班族首選健康餐盒・三角御結",
+  heroTitle: "日式職人手作 馬偕醫院上班族首選會議餐盒 三角御結飯糰",
   heroSub: "嚴選食材、精準調配。08:00–17:00 全日守護您的日常每一餐。",
   seoTitle:
     "摳門製研所｜雙連站・馬偕醫院旁 會議餐盒、三角御結、日式炒麵（台北大同區）",
@@ -120,7 +120,6 @@ export const MENU: MenuCategory[] = [
     id: "drinks",
     title: "飲品",
     items: [
-      { name: "鳳梨梅釀冰茶", price: 50 },
       { name: "桂花烏龍（無糖）", price: 40 },
       { name: "復刻紅茶", price: 30 },
     ],
@@ -206,7 +205,7 @@ export const BUSINESS_POINTS = [
   },
   {
     title: "可加購茶飲",
-    body: "鳳梨梅釀冰茶、桂花烏龍（無糖）、復刻紅茶，可與餐盒一起訂。",
+    body: "桂花烏龍（無糖）、復刻紅茶，可與餐盒一起訂。",
   },
   {
     title: "可開立收據／發票",

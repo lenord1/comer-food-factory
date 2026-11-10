@@ -21,15 +21,9 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* 右下角 LINE 按鈕：手機在底部轉換列上方，桌機貼近右下角 */
+/* 桌機版右下角 LINE 按鈕位置（手機版隱藏） */
 .floating-line {
-  bottom: calc(5rem + env(safe-area-inset-bottom));
-}
-
-@media (min-width: 768px) {
-  .floating-line {
-    bottom: 1.5rem;
-  }
+  bottom: 1.5rem;
 }
 
 @media (min-width: 768px) {

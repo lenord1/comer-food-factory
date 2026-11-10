@@ -38,7 +38,7 @@ export default function MenuIndexPage() {
 
         <h1 className="mt-6 font-serif text-3xl font-bold text-brand md:text-4xl">完整菜單</h1>
         <p className="mt-2 text-sm text-ink-soft">
-          點選餐點可查看價格、供應時段、葷素與常見問題。飲品價格：復刻紅茶 $30、桂花烏龍（無糖）$40、鳳梨梅釀冰茶 $50。
+          點選餐點可查看價格、供應時段、葷素與常見問題。飲品價格：復刻紅茶 $30、桂花烏龍（無糖）$40。
         </p>
 
         {DISH_CATEGORIES.map((cat) => (
