@@ -87,9 +87,19 @@ export default function Home() {
         <section id="story" className="border-y border-brand/10 bg-paper">
           <div className="mx-auto max-w-3xl px-4 py-12 text-center">
             <h2 className="font-serif text-sm font-bold tracking-[0.3em] text-brand">品牌故事</h2>
-            <p className="mt-5 whitespace-pre-line font-serif text-xl leading-loose text-ink md:text-2xl md:leading-loose">
-              {SITE.philosophy}
-            </p>
+            {/* 每行一句、不換行；字級隨螢幕寬度縮放，避免手機上「態／度」被拆行 */}
+            <div className="mt-6 space-y-3 font-serif text-[clamp(13px,4.2vw,24px)] leading-relaxed text-ink md:space-y-4">
+              {SITE.philosophy.split("\n").map((line) => (
+                <p
+                  key={line}
+                  className={`whitespace-nowrap ${
+                    line.includes("對自己摳門") ? "font-bold text-brand" : ""
+                  }`}
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
         </section>
 
