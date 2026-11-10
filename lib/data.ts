@@ -262,6 +262,5 @@ export const OPENING_HOURS = SLOTS.map((s) => ({
 export const PENDING_CONFIRMATION = [
   "自訂網域（目前使用 Vercel 網址）",
   "門市精確座標（目前為概略值，需以 Google 商家檔案校正）",
-  "地址寫法統一（網站「台北市」、DM「臺北市…雙連里」，請以 Google 商家檔案為準）",
   "餐點實拍照片（目前為 DM 示意圖與佔位區塊）",
 ];

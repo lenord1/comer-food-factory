@@ -70,6 +70,5 @@ import Image from "next/image";
 
 - [ ] 自訂網域（目前使用 `comer-food-factory-dadz.vercel.app`）
 - [ ] 門市精確座標（`SITE.geo` 為概略值，需以 Google 商家檔案校正）
-- [ ] 地址寫法統一（網站「台北市」、DM「臺北市…雙連里」，以 Google 商家檔案為準）
 - [ ] 餐點實拍照片（目前為 DM 示意圖與佔位區塊）
 - [ ] 每道餐點的實際內容（配菜、醬料、份量）

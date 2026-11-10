@@ -7,30 +7,6 @@ export default function SiteFooter() {
   return (
     <footer className="border-t border-brand/10 bg-oat">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 text-sm sm:grid-cols-2 md:grid-cols-3">
-        <div>
-          <p className="font-serif text-lg font-bold text-brand">{SITE.nameZh}</p>
-          <p className="text-xs text-ink-soft">{SITE.nameEn}</p>
-          <address className="mt-3 space-y-1 not-italic">
-            <p>{SITE.address}</p>
-            <p>
-              電話：
-              <a href={SITE.phoneHref} className="font-num tabular-nums hover:text-brand">
-                {SITE.phoneDisplay}
-              </a>
-            </p>
-          </address>
-          <p className="mt-2 text-ink-soft">{SITE.transit.join("・")}</p>
-        </div>
-
-        <div>
-          <p className="font-bold">營業時間</p>
-          <p className="mt-1">{SITE.openDaysLabel}</p>
-          <p className="font-num tabular-nums">
-            {SITE.opens}–{SITE.closes}
-          </p>
-          <p className="mt-2 text-ink-soft">會議餐盒外送需前一天預約</p>
-        </div>
-
         <nav aria-label="頁尾連結">
           <p className="font-bold">快速連結</p>
           <ul className="mt-1 space-y-1">
@@ -58,6 +34,30 @@ export default function SiteFooter() {
             </li>
           </ul>
         </nav>
+        <div>
+          <p className="font-serif text-lg font-bold text-brand">{SITE.nameZh}</p>
+          <p className="text-xs text-ink-soft">{SITE.nameEn}</p>
+          <address className="mt-3 space-y-1 not-italic">
+            <p>{SITE.address}</p>
+            <p>
+              電話：
+              <a href={SITE.phoneHref} className="font-num tabular-nums hover:text-brand">
+                {SITE.phoneDisplay}
+              </a>
+            </p>
+          </address>
+          <p className="mt-2 text-ink-soft">{SITE.transit.join("・")}</p>
+        </div>
+
+        <div>
+          <p className="font-bold">營業時間</p>
+          <p className="mt-1">{SITE.openDaysLabel}</p>
+          <p className="font-num tabular-nums">
+            {SITE.opens}–{SITE.closes}
+          </p>
+          <p className="mt-2 text-ink-soft">會議餐盒外送需前一天預約</p>
+        </div>
+
       </div>
       <p className="border-t border-brand/10 px-4 py-4 text-center text-xs text-ink-soft">
         © {new Date().getFullYear()} {SITE.fullName}
