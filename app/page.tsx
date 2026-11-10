@@ -83,6 +83,16 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 品牌故事：品牌理念獨立區塊，放在首屏之後建立信任 */}
+        <section id="story" className="border-y border-brand/10 bg-paper">
+          <div className="mx-auto max-w-3xl px-4 py-12 text-center">
+            <h2 className="font-serif text-sm font-bold tracking-[0.3em] text-brand">品牌故事</h2>
+            <p className="mt-5 whitespace-pre-line font-serif text-xl leading-loose text-ink md:text-2xl md:leading-loose">
+              {SITE.philosophy}
+            </p>
+          </div>
+        </section>
+
         {/* 3. 時段菜單 */}
         <section id="menu" className="bg-oat">
           <div className="mx-auto max-w-6xl px-4 py-12">
@@ -182,10 +192,6 @@ export default function Home() {
         {/* 6. 門市資訊與地圖 */}
         <section id="store" className="mx-auto max-w-6xl px-4 py-12">
           <h2 className={sectionTitle}>門市資訊與地圖</h2>
-          <p className="mt-3 max-w-3xl whitespace-pre-line font-serif text-lg leading-loose text-ink">
-            {SITE.philosophy}
-          </p>
-
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <div className="space-y-5">
               <div className="flex gap-3">
