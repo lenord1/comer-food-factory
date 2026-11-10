@@ -182,7 +182,9 @@ export default function Home() {
         {/* 6. 門市資訊與地圖 */}
         <section id="store" className="mx-auto max-w-6xl px-4 py-12">
           <h2 className={sectionTitle}>門市資訊與地圖</h2>
-          <p className="mt-3 max-w-3xl leading-relaxed text-ink-soft">{SITE.philosophy}</p>
+          <p className="mt-3 max-w-3xl whitespace-pre-line font-serif text-lg leading-loose text-ink">
+            {SITE.philosophy}
+          </p>
 
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <div className="space-y-5">

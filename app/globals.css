@@ -21,6 +21,17 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* 右下角 LINE 按鈕：手機在底部轉換列上方，桌機貼近右下角 */
+.floating-line {
+  bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  .floating-line {
+    bottom: 1.5rem;
+  }
+}
+
 @media (min-width: 768px) {
   .mobile-bar-space {
     padding-bottom: 0;
