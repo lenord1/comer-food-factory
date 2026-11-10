@@ -46,13 +46,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: SITE.fullName,
       title: dish.seoTitle,
       description: dish.seoDescription,
-      images: [{ url: "/logo.jpg", width: 891, height: 882, alt: `${SITE.nameZh} Logo` }],
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: `${SITE.nameZh}：${dish.name}` }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: dish.seoTitle,
       description: dish.seoDescription,
-      images: ["/logo.jpg"],
+      images: ["/og.jpg"],
     },
   };
 }
@@ -96,31 +96,33 @@ export default async function DishPage({ params }: Props) {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Product",
-        "@id": `${pageUrl}#product`,
+        "@type": "MenuItem",
+        "@id": `${pageUrl}#menuitem`,
         name: dish.name,
         description: dish.description,
-        // 有示意照片用示意照片；素食品項沒有照片，暫以品牌 Logo 代替。
-        image: [dish.photo ? `${SITE.siteUrl}${dish.photo}` : `${SITE.siteUrl}/logo.jpg`],
-        category: dish.categoryLabel,
+        // 有示意照片用示意照片；素食品項沒有照片，用分享圖代替。
+        image: [dish.photo ? `${SITE.siteUrl}${dish.photo}` : `${SITE.siteUrl}/og.jpg`],
         url: pageUrl,
-        brand: { "@type": "Brand", name: SITE.nameZh },
+        ...(dish.isVegetarian ? { suitableForDiet: "https://schema.org/VegetarianDiet" } : {}),
         offers: {
           "@type": "Offer",
           url: pageUrl,
           price: String(dish.price),
           priceCurrency: "TWD",
           availability: "https://schema.org/InStock",
-          seller: {
-            "@type": "Restaurant",
-            "@id": `${SITE.siteUrl}/#restaurant`,
-            name: SITE.fullName,
-          },
+          availableDeliveryMethod: "http://purl.org/goodrelations/v1#DeliveryModePickUp",
         },
-        additionalProperty: [
-          { "@type": "PropertyValue", name: "供應時段", value: dish.timeLabel },
-          { "@type": "PropertyValue", name: "葷素類別", value: dish.isVegetarian ? "素食" : "葷食" },
-        ],
+        menuAddOn: dish.addons?.map((a) => ({
+          "@type": "MenuItem",
+          name: a.name,
+          offers: { "@type": "Offer", price: String(a.price), priceCurrency: "TWD" },
+        })),
+        isPartOf: {
+          "@type": "MenuSection",
+          name: dish.categoryLabel,
+          url: `${SITE.siteUrl}/menu#${dish.category}`,
+        },
+        provider: { "@id": `${SITE.siteUrl}/#restaurant` },
       },
       {
         "@type": "FAQPage",

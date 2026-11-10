@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   BadgeCheck,
   Briefcase,
@@ -15,20 +16,33 @@ import {
   Timer,
   TrainFront,
   Building2,
-  Coffee,
+  Truck,
 } from "lucide-react";
 import PageShell from "@/components/PageShell";
 import TimeSlotMenu from "@/components/TimeSlotMenu";
 import InstagramIcon from "@/components/InstagramIcon";
+import DeliveryTiers from "@/components/DeliveryTiers";
+import JsonLd from "@/components/JsonLd";
 import { BUSINESS_POINTS, FAQ, OPENING_HOURS, QUICK_STEPS, SITE } from "@/lib/data";
 
-const businessIcons = [BadgeCheck, Leaf, Coffee, Receipt];
+const businessIcons = [BadgeCheck, Leaf, Truck, Receipt];
 
 const sectionTitle = "font-serif text-2xl font-bold text-brand md:text-3xl";
 
 export default function Home() {
   return (
     <PageShell>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }}
+      />
       <main id="top">
         {/* 2. 首屏 Hero */}
         <section className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 md:grid-cols-[1fr_auto] md:py-16">
@@ -55,8 +69,8 @@ export default function Home() {
                   官方 LINE 預約
                 </span>
               </a>
-              <a
-                href="#business"
+              <Link
+                href="/meeting-bento"
                 className="rounded bg-ink p-5 text-paper transition-opacity hover:opacity-95"
               >
                 <Briefcase className="h-6 w-6" aria-hidden="true" />
@@ -67,7 +81,7 @@ export default function Home() {
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold underline underline-offset-4">
                   查看方案
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -134,6 +148,22 @@ export default function Home() {
               );
             })}
           </ul>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <DeliveryTiers />
+            <div className="flex flex-col justify-center rounded border border-brand/15 bg-oat p-5">
+              <p className="font-serif text-lg font-bold">要報價或轉給主管核准？</p>
+              <p className="mt-1 text-sm text-ink-soft">
+                會議餐盒專頁整理了方案、外送門檻、預約流程與發票說明，可以直接轉寄連結。
+              </p>
+              <Link
+                href="/meeting-bento"
+                className="mt-3 inline-flex w-fit items-center gap-1 font-bold text-brand underline underline-offset-4"
+              >
+                查看會議餐盒完整說明
+              </Link>
+            </div>
+          </div>
 
           <h3 className="mt-10 font-serif text-xl font-bold text-brand">
             會議訂購 4 大常見問題
@@ -225,6 +255,7 @@ export default function Home() {
                 <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
                 <div className="w-full">
                   <p className="font-bold">營業時間</p>
+                  <p className="mt-0.5 text-sm font-bold text-brand">{SITE.openDaysLabel}</p>
                   <ul className="mt-1 space-y-1.5 text-sm">
                     {OPENING_HOURS.map((h) => (
                       <li key={h.label}>
@@ -259,7 +290,7 @@ export default function Home() {
                   className="inline-flex items-center gap-2 rounded border border-brand px-4 py-2.5 font-bold text-brand hover:bg-oat"
                 >
                   <Navigation className="h-4 w-4" aria-hidden="true" />
-                  地圖導航
+                  Google 地圖導航・評論
                 </a>
                 <a
                   href={SITE.instagramUrl}

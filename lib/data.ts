@@ -7,9 +7,8 @@ export const SITE = {
   nameZh: "摳門製研所",
   nameEn: "comer food factory",
   fullName: "摳門製研所（comer food factory）",
-  // TODO(待確認)：正式網域。目前為 Vercel 預設網址的暫定值，部署後請改成實際網址，
-  // 或在 Vercel 設定環境變數 NEXT_PUBLIC_SITE_URL。
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://comer-food-factory.vercel.app",
+  // 目前的正式網址（Vercel）。之後換自訂網域時，改這裡或在 Vercel 設定 NEXT_PUBLIC_SITE_URL。
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://comer-food-factory-dadz.vercel.app",
   phoneDisplay: "02-2799-0735",
   phoneHref: "tel:+886227990735",
   phoneIntl: "+886-2-2799-0735",
@@ -26,30 +25,33 @@ export const SITE = {
   ],
   lineUrl: "https://lin.ee/xAdQuww",
   instagramUrl: "https://www.instagram.com/comer.food.factory/",
+  // Google 商家檔案（地圖導航、評論）
+  googleBusinessUrl: "https://maps.app.goo.gl/16KjN31VZYaENarL9",
   priceRange: "$$",
   // TODO(待確認)：以下為雙連街55號附近的概略座標，請以 Google Maps 校正後更新。
   geo: { latitude: 25.0577, longitude: 121.5207 },
-  // TODO(待確認)：營業星期。暫以週一至週五放入結構化資料，請確認後更新。
   openDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
-  openDaysLabel: "營業星期：待確認（暫以週一至週五計）",
-  opens: "08:00",
+  openDaysLabel: "週一至週五營業（週六、日公休）",
+  opens: "08:10",
   closes: "17:00",
   deliveryNote:
-    "外送以中山區雙連站及其鄰近區域為主。實際可否配送、免運條件，請來電或透過官方 LINE 確認。",
+    "外送需前一天預約（不接受當天預約外送），依距離設滿額門檻：1 公里內滿 $1,000、1–3 公里滿 $1,500、3–5 公里滿 $2,000、5 公里以上滿 $2,500。",
   // 品牌理念：每行一句，網站以換行顯示（與 Instagram 簡介一致）
   philosophy:
     "comer，西班牙語的「吃」\n摳門，是老闆們對自己嚴謹的初心\n秉持著「對自己摳門，但對客人大方」的態度\n服務每一位摳門的人們",
-  heroTitle: "日式職人手作 馬偕醫院上班族首選會議餐盒 三角御結飯糰",
-  heroSub: "嚴選食材、精準調配。08:00–17:00 全日守護您的日常每一餐。",
+  heroTitle: "雙連站日式職人手作｜馬偕醫院上班族首選會議餐盒・三角御結飯糰",
+  heroSub:
+    "對自己摳門，對客人大方。週一至週五 08:10–17:00，早上三角御結、中午炒麵與會議餐盒，LINE 預約到店免排隊。",
   seoTitle:
     "摳門製研所｜雙連站・馬偕醫院旁 會議餐盒、三角御結、日式炒麵（台北大同區）",
   seoDescription:
-    "雙連捷運站與馬偕醫院旁的日式職人手作餐盒。三角御結 $70、日式炒麵 $130、御食餐盒 $150 均一價，會議商務餐盒可開立收據／發票，官方 LINE 預約免排隊。",
-  // 地圖：不使用 API 金鑰的嵌入與導航連結
+    "雙連捷運站、馬偕醫院旁的日式職人手作。三角御結 $70、日式炒麵 $130、會議餐盒 $150 均一價，可開收據／發票。週一至週五 08:10–17:00，LINE 預約免排隊，會議餐盒前一天預約可外送。",
+  // 地圖：嵌入以店名＋地址查詢（不需 API 金鑰）；導航連到 Google 商家檔案
   mapEmbedUrl:
-    "https://maps.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%90%8C%E5%8D%80%E9%9B%99%E9%80%A3%E8%A1%97%E5%B9%B055%E8%99%9F&hl=zh-TW&z=17&output=embed",
-  mapLinkUrl:
-    "https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%90%8C%E5%8D%80%E9%9B%99%E9%80%A3%E8%A1%97%E5%B9%B055%E8%99%9F",
+    "https://maps.google.com/maps?q=" +
+    encodeURIComponent("摳門製研所 台北市大同區雙連街55號") +
+    "&hl=zh-TW&z=17&output=embed",
+  mapLinkUrl: "https://maps.app.goo.gl/16KjN31VZYaENarL9",
 } as const;
 
 export type TagKey = "vegan" | "veg-friendly" | "spicy";
@@ -167,8 +169,8 @@ export const SLOTS: TimeSlot[] = [
   {
     id: "morning",
     label: "晨間快取",
-    timeLabel: "08:00–10:30",
-    startMin: 8 * 60,
+    timeLabel: "08:10–10:30",
+    startMin: 8 * 60 + 10,
     endMin: 10 * 60 + 30,
     summary: "三角御結、飲品",
     categories: ["onigiri", "drinks"],
@@ -194,6 +196,16 @@ export const SLOTS: TimeSlot[] = [
   },
 ];
 
+/** 外送滿額門檻（依送餐地點與門市距離） */
+export const DELIVERY_TIERS = [
+  { range: "1 公里內", minimum: 1000 },
+  { range: "1–3 公里", minimum: 1500 },
+  { range: "3–5 公里", minimum: 2000 },
+  { range: "5 公里以上", minimum: 2500 },
+];
+
+export const DELIVERY_RULE_SHORT = "外送需前一天預約，不接受當天預約外送。";
+
 export const BUSINESS_POINTS = [
   {
     title: "均一價 $150，報帳免煩惱",
@@ -201,11 +213,11 @@ export const BUSINESS_POINTS = [
   },
   {
     title: "葷素皆備",
-    body: "有豚肉、雞肉與日式烤素排餐盒，開會時不同飲食需求都能照顧到。",
+    body: "有豚肉、雞肉，以及鍋邊素的日式烤素排餐盒，開會時不同飲食需求都能照顧到。",
   },
   {
-    title: "可加購茶飲",
-    body: "桂花烏龍（無糖）、復刻紅茶，可與餐盒一起訂。",
+    title: "前一天預約，滿額外送",
+    body: "外送需前一天預約。1 公里內滿 $1,000 即可外送，距離越遠門檻越高，可加購桂花烏龍、復刻紅茶。",
   },
   {
     title: "可開立收據／發票",
@@ -213,19 +225,19 @@ export const BUSINESS_POINTS = [
   },
 ];
 
-// FAQ 不編造具體數字；尚未確認的條件一律請客人來電或 LINE 詢問。
+// FAQ 只寫店家確認過的條件；未確認的事一律請客人來電或 LINE 詢問。
 export const FAQ = [
   {
-    q: "會議便當可以外送嗎？外送距離與免運條件是什麼？",
-    a: "外送以中山區雙連站及其鄰近區域為主。實際可否配送、免運條件，會依地點與訂購內容而定，請來電 02-2799-0735 或透過官方 LINE 告知地址，我們會回覆確認。",
+    q: "會議便當可以外送嗎？外送門檻是多少？",
+    a: "可以。外送依送餐地點與門市的距離設滿額門檻：1 公里內滿 $1,000、1–3 公里滿 $1,500、3–5 公里滿 $2,000、5 公里以上滿 $2,500。請透過官方 LINE 或電話 02-2799-0735 告知地址與數量。",
   },
   {
     q: "會議餐盒需要提前幾天預約？",
-    a: "團訂建議越早告知越好，讓我們有足夠時間備餐。實際可預約的天數與當日截單時間，請以官方 LINE 或電話確認為準。",
+    a: "外送需前一天預約，不接受當天預約外送。到店外帶可透過官方 LINE 預約取餐時間。",
   },
   {
     q: "可以指定葷素或客製餐點嗎？",
-    a: "御食餐盒有豚肉、雞肉與日式烤素排（素食友善）可選。訂購時請告知人數與葷素需求，其他客製需求也歡迎來電或 LINE 洽詢，由店家評估是否可行。",
+    a: "御食餐盒有豚肉、雞肉，以及鍋邊素的日式烤素排御食盒可選。訂購時請告知人數與葷素需求，其他客製需求也歡迎來電或 LINE 洽詢，由店家評估是否可行。",
   },
   {
     q: "可以開發票或收據嗎？可以加購茶飲嗎？",
@@ -248,9 +260,9 @@ export const OPENING_HOURS = SLOTS.map((s) => ({
 
 /** 待老闆確認清單（同步寫在 README） */
 export const PENDING_CONFIRMATION = [
-  "營業星期（目前暫以週一至週五放入結構化資料）",
-  "正式網域（目前為 Vercel 預設網址的暫定值）",
-  "門市精確座標（目前為概略值，需以 Google Maps 校正）",
-  "餐點實拍照片（目前為佔位區塊）",
-  "外送免運條件與預約天數（目前網站只寫「請來電或 LINE 確認」）",
+  "自訂網域（目前使用 Vercel 網址）",
+  "門市精確座標（目前為概略值，需以 Google 商家檔案校正）",
+  "地址寫法統一（網站「台北市」、DM「臺北市…雙連里」，請以 Google 商家檔案為準）",
+  "餐點實拍照片（目前為 DM 示意圖與佔位區塊）",
+  "外送達門檻後是否另收運費",
 ];

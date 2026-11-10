@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { MENU, SITE } from "@/lib/data";
+import Analytics from "@/components/Analytics";
+import { DELIVERY_RULE_SHORT, DELIVERY_TIERS, MENU, SITE } from "@/lib/data";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.siteUrl),
@@ -18,13 +19,13 @@ export const metadata: Metadata = {
     siteName: SITE.fullName,
     title: SITE.seoTitle,
     description: SITE.seoDescription,
-    images: [{ url: "/logo.jpg", width: 891, height: 882, alt: `${SITE.nameZh} Logo` }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: `${SITE.nameZh}：會議餐盒、三角御結、日式炒麵` }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: SITE.seoTitle,
     description: SITE.seoDescription,
-    images: ["/logo.jpg"],
+    images: ["/og.jpg"],
   },
 };
 
@@ -48,7 +49,12 @@ const jsonLd = {
   priceRange: SITE.priceRange,
   servesCuisine: ["日式", "御結", "日式炒麵", "便當"],
   logo: `${SITE.siteUrl}/logo.jpg`,
-  image: [`${SITE.siteUrl}/logo.jpg`],
+  image: [
+    `${SITE.siteUrl}/og.jpg`,
+    `${SITE.siteUrl}/menu/bento.jpg`,
+    `${SITE.siteUrl}/menu/onigiri.jpg`,
+    `${SITE.siteUrl}/logo.jpg`,
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress: SITE.addressDetail.street,
@@ -62,7 +68,6 @@ const jsonLd = {
     latitude: SITE.geo.latitude,
     longitude: SITE.geo.longitude,
   },
-  // TODO(待確認)：營業星期暫以週一至週五計。
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -72,11 +77,12 @@ const jsonLd = {
     },
   ],
   areaServed: [
-    { "@type": "AdministrativeArea", name: "中山區雙連站周邊" },
-    { "@type": "AdministrativeArea", name: "大同區" },
+    { "@type": "AdministrativeArea", name: "台北市大同區" },
+    { "@type": "AdministrativeArea", name: "台北市中山區" },
   ],
-  hasMap: SITE.mapLinkUrl,
-  sameAs: [SITE.instagramUrl],
+  hasMap: SITE.googleBusinessUrl,
+  hasMenu: `${SITE.siteUrl}/menu`,
+  sameAs: [SITE.instagramUrl, SITE.googleBusinessUrl],
   makesOffer: [
     {
       "@type": "Offer",
@@ -118,7 +124,7 @@ const jsonLd = {
     {
       "@type": "PropertyValue",
       name: "delivery",
-      value: "中山區雙連站周邊為主，實際可否配送請來電或 LINE 確認",
+      value: `${DELIVERY_RULE_SHORT}滿額外送：${DELIVERY_TIERS.map((t) => `${t.range}滿 $${t.minimum}`).join("、")}`,
     },
     { "@type": "PropertyValue", name: "nearbyLandmark", value: "馬偕紀念醫院" },
   ],
@@ -136,6 +142,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: jsonLdString }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );

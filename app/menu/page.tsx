@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, MessageCircle } from "lucide-react";
 import PageShell from "@/components/PageShell";
+import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/lib/data";
-import { DISHES, DISH_CATEGORIES } from "@/lib/dishes";
+import { DISHES, DISH_CATEGORIES, DRINK_PAIRINGS } from "@/lib/dishes";
 
 const title = "完整菜單｜三角御結、日式炒麵、御食餐盒｜摳門製研所 雙連街55號";
 const description =
@@ -20,13 +21,45 @@ export const metadata: Metadata = {
     siteName: SITE.fullName,
     title,
     description,
-    images: [{ url: "/logo.jpg", width: 891, height: 882, alt: `${SITE.nameZh} Logo` }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: `${SITE.nameZh} 完整菜單` }],
   },
+};
+
+const offer = (price: number) => ({ "@type": "Offer", price: String(price), priceCurrency: "TWD" });
+
+const menuJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Menu",
+  "@id": `${SITE.siteUrl}/menu#menu`,
+  name: `${SITE.nameZh} 菜單`,
+  url: `${SITE.siteUrl}/menu`,
+  inLanguage: "zh-Hant-TW",
+  hasMenuSection: [
+    ...DISH_CATEGORIES.map((cat) => ({
+      "@type": "MenuSection",
+      name: cat.label,
+      description: cat.blurb,
+      url: `${SITE.siteUrl}/menu#${cat.id}`,
+      hasMenuItem: DISHES.filter((d) => d.category === cat.id).map((d) => ({
+        "@type": "MenuItem",
+        name: d.name,
+        url: `${SITE.siteUrl}/menu/${d.slug}`,
+        offers: offer(d.price),
+        ...(d.isVegetarian ? { suitableForDiet: "https://schema.org/VegetarianDiet" } : {}),
+      })),
+    })),
+    {
+      "@type": "MenuSection",
+      name: "飲品",
+      hasMenuItem: DRINK_PAIRINGS.map((d) => ({ "@type": "MenuItem", name: d.name, offers: offer(d.price) })),
+    },
+  ],
 };
 
 export default function MenuIndexPage() {
   return (
     <PageShell>
+      <JsonLd data={menuJsonLd} />
       <main className="mx-auto max-w-6xl px-4 py-8 md:py-12">
         <nav aria-label="麵包屑" className="text-sm text-ink-soft">
           <ol className="flex items-center gap-1">

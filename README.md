@@ -61,12 +61,16 @@ import Image from "next/image";
 2. 在 Vercel 的 Environment Variables 新增 `NEXT_PUBLIC_SITE_URL`（例如 `https://你的網域`），重新部署。
    canonical、Open Graph 與 JSON-LD 的網址都會跟著更新。
 
+## 成效追蹤（GA4）
+
+在 Vercel → Settings → Environment Variables 新增 `NEXT_PUBLIC_GA_ID`（例如 `G-XXXXXXX`），重新部署即啟用。
+會自動記錄三種轉換事件：`line_click`（LINE 連結）、`phone_click`（電話）、`menu_download`（下載團訂菜單）。
+
 ## 待老闆確認清單
 
-- [ ] 營業星期（目前暫以週一至週五放入 JSON-LD）
-- [ ] 正式網域（`SITE.siteUrl` 目前為暫定值）
-- [ ] 門市精確座標（`SITE.geo` 為概略值，需以 Google Maps 校正）
-- [ ] 餐點實拍照片（目前為佔位區塊）
-- [ ] 外送免運條件與可預約天數（網站目前只寫「請來電或 LINE 確認」）
-
-程式碼中標示 `TODO(待確認)` 的位置即為上述項目。
+- [ ] 自訂網域（目前使用 `comer-food-factory-dadz.vercel.app`）
+- [ ] 門市精確座標（`SITE.geo` 為概略值，需以 Google 商家檔案校正）
+- [ ] 地址寫法統一（網站「台北市」、DM「臺北市…雙連里」，以 Google 商家檔案為準）
+- [ ] 餐點實拍照片（目前為 DM 示意圖與佔位區塊）
+- [ ] 外送達門檻後是否另收運費
+- [ ] 每道餐點的實際內容（配菜、醬料、份量）

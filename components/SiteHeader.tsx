@@ -20,8 +20,8 @@ export default function SiteHeader() {
           </span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm md:flex" aria-label="主選單">
-          <Link href="/#menu" className="hover:text-brand">時段菜單</Link>
-          <Link href="/#business" className="hover:text-brand">商務會議餐盒</Link>
+          <Link href="/menu" className="hover:text-brand">完整菜單</Link>
+          <Link href="/meeting-bento" className="hover:text-brand">會議餐盒</Link>
           <Link href="/#quick" className="hover:text-brand">外帶外送</Link>
           <Link href="/#store" className="hover:text-brand">門市交通</Link>
         </nav>
@@ -31,7 +31,7 @@ export default function SiteHeader() {
           rel="noopener noreferrer"
           className="shrink-0 rounded bg-accent px-3 py-2 text-sm font-bold text-white hover:bg-accent-dark"
         >
-          線上點餐 / 會議團訂
+          LINE 點餐 / 會議團訂
         </a>
       </div>
     </header>
