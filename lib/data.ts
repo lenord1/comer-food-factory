@@ -57,8 +57,8 @@ export const SITE = {
 export type TagKey = "vegan" | "veg-friendly" | "spicy";
 
 export const TAGS: Record<TagKey, { label: string; tone: "leaf" | "brand" }> = {
-  vegan: { label: "全素／蛋奶素可食", tone: "leaf" },
-  "veg-friendly": { label: "素食友善", tone: "leaf" },
+  vegan: { label: "蛋奶素", tone: "leaf" },
+  "veg-friendly": { label: "蛋奶素", tone: "leaf" },
   spicy: { label: "辣", tone: "brand" },
 };
 
@@ -222,7 +222,7 @@ export const BUSINESS_POINTS = [
   },
   {
     title: "葷素皆備",
-    body: "有豚肉、雞肉，以及鍋邊素的日式烤素排餐盒，開會時不同飲食需求都能照顧到。",
+    body: "有豚肉、雞肉，以及蛋奶素的鍋邊素餐盒，開會時不同飲食需求都能照顧到。",
   },
   {
     title: "前一天預約，滿額外送",
@@ -246,7 +246,7 @@ export const FAQ = [
   },
   {
     q: "可以指定葷素或客製餐點嗎？",
-    a: "御食餐盒有豚肉、雞肉，以及鍋邊素的日式烤素排御食盒可選。訂購時請告知人數與葷素需求，其他客製需求也歡迎來電或 LINE 洽詢，由店家評估是否可行。",
+    a: "御食餐盒有豚肉、雞肉，以及蛋奶素的鍋邊素御食盒可選。訂購時請告知人數與葷素需求，其他客製需求也歡迎來電或 LINE 洽詢，由店家評估是否可行。",
   },
   {
     q: "可以開發票或收據嗎？可以加購茶飲嗎？",

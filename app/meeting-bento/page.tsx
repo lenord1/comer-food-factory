@@ -11,7 +11,7 @@ import { DISHES, DRINK_PAIRINGS } from "@/lib/dishes";
 const PATH = "/meeting-bento";
 const title = "台北會議餐盒推薦｜$150 均一價、可開發票、前一天預約外送｜摳門製研所 雙連站";
 const description =
-  "雙連站、馬偕醫院旁的日式會議餐盒，5 款均一價 $150（含鍋邊素），可開收據／發票。外送需前一天預約，1 公里內滿 $1,000 即可外送、達門檻免運費，官方 LINE 團訂。";
+  "雙連站、馬偕醫院旁的日式會議餐盒，5 款均一價 $150（含 1 款蛋奶素），可開收據／發票。外送需前一天預約，1 公里內滿 $1,000 即可外送、達門檻免運費，官方 LINE 團訂。";
 
 export const metadata: Metadata = {
   title,
@@ -47,7 +47,7 @@ const EXAMPLES = [7, 10, 14, 17].map((n) => {
 });
 
 const STEPS = [
-  { title: "前一天以前用 LINE 告知", body: "日期、送達時間、地址、人數與葷素數量。外送不接受當天預約。" },
+  { title: "前一天以前用 LINE 告知", body: "日期、送達時間、地址、人數與葷素數量（蛋奶素請註明）。外送不接受當天預約。" },
   { title: "店家回覆確認", body: "確認送達距離、金額是否達外送門檻，以及餐盒口味分配。" },
   { title: "提供收據／發票資訊", body: "需要報帳請告知抬頭與統一編號。" },
   { title: "依約送達或到店自取", body: `午間 ${NOON?.timeLabel ?? "11:40–14:00"} 供應，自取地點：${SITE.address}。` },
@@ -86,7 +86,7 @@ export default function MeetingBentoPage() {
           name: d.name,
           url: `${SITE.siteUrl}/menu/${d.slug}`,
           offers: { "@type": "Offer", price: String(d.price), priceCurrency: "TWD" },
-          ...(d.isVegetarian ? { suitableForDiet: "https://schema.org/VegetarianDiet" } : {}),
+          ...(d.isVegetarian ? { suitableForDiet: "https://schema.org/LacOvoVegetarianDiet" } : {}),
         })),
       },
       {
@@ -110,7 +110,7 @@ export default function MeetingBentoPage() {
 
   const answerRows = [
     { label: "價格", value: `會議餐盒均一價 $${PRICE}，5 款同價，好請款` },
-    { label: "款式", value: "豚肉 2 款、雞肉 2 款、鍋邊素 1 款" },
+    { label: "款式", value: "豚肉 2 款、雞肉 2 款、蛋奶素鍋邊素 1 款" },
     { label: "供應", value: `${SITE.openDaysLabel}，午間 ${NOON?.timeLabel ?? "11:40–14:00"}` },
     { label: "預約", value: DELIVERY_RULE_SHORT },
     {
@@ -142,7 +142,7 @@ export default function MeetingBentoPage() {
               台北會議餐盒｜$150 均一價的日式御食餐盒
             </h1>
             <p className="mt-3 leading-relaxed">
-              摳門製研所的會議餐盒 5 款均一價 ${PRICE}，含 1 款鍋邊素，可開立收據／發票。店在雙連捷運站 2
+              摳門製研所的會議餐盒 5 款均一價 ${PRICE}，含 1 款蛋奶素（鍋邊素），可開立收據／發票。店在雙連捷運站 2
               號出口步行約 4 分鐘、馬偕紀念醫院旁。外送需前一天預約，1 公里內滿 $1,000 即可外送，達門檻免運費。
             </p>
 

@@ -103,7 +103,7 @@ export default async function DishPage({ params }: Props) {
         // 有示意照片用示意照片；素食品項沒有照片，用分享圖代替。
         image: [dish.photo ? `${SITE.siteUrl}${dish.photo}` : `${SITE.siteUrl}/og.jpg`],
         url: pageUrl,
-        ...(dish.isVegetarian ? { suitableForDiet: "https://schema.org/VegetarianDiet" } : {}),
+        ...(dish.isVegetarian ? { suitableForDiet: "https://schema.org/LacOvoVegetarianDiet" } : {}),
         offers: {
           "@type": "Offer",
           url: pageUrl,

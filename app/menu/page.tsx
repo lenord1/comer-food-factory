@@ -45,7 +45,7 @@ const menuJsonLd = {
         name: d.name,
         url: `${SITE.siteUrl}/menu/${d.slug}`,
         offers: offer(d.price),
-        ...(d.isVegetarian ? { suitableForDiet: "https://schema.org/VegetarianDiet" } : {}),
+        ...(d.isVegetarian ? { suitableForDiet: "https://schema.org/LacOvoVegetarianDiet" } : {}),
       })),
     })),
     {

@@ -37,7 +37,7 @@ const BENTOS = [
 const FAQ = [
   { q: "會議餐盒最少要訂幾個才能外送？", a: "只訂 $150 餐盒的話，1 公里內約 7 盒（$1,050）即可外送，距離越遠門檻越高，達門檻免運費。" },
   { q: "可以當天訂、當天送嗎？", a: "外送不接受當天預約，請前一天預約。" },
-  { q: "可以指定葷素嗎？", a: "可以，訂購時告知人數與葷素數量，素食可選日式烤素排御食盒。" },
+  { q: "可以指定葷素嗎？", a: "可以，訂購時告知人數與葷素數量，蛋奶素可選日式烤素排御食盒（不含肉類，非全素）。" },
   { q: "可以開發票嗎？", a: "可以，企業行號訂購可開立收據或發票，請告知抬頭與統一編號。" },
   { q: "店在哪裡、幾點營業？", a: `${SITE.address}，${SITE.openDaysLabel} ${SITE.opens}–${SITE.closes}。` },
 ];
@@ -120,7 +120,7 @@ export default function Page() {
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-sm">素食的同仁可另選日式烤素排御食盒，同樣 $150。</p>
+        <p className="mt-3 text-sm">蛋奶素的同仁可另選日式烤素排御食盒（蛋奶素），同樣 $150。</p>
 
         <h2 className="mt-10 font-serif text-2xl font-bold text-brand">一盒裡有什麼</h2>
         <p className="mt-2">
