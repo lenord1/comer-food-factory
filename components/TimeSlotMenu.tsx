@@ -77,6 +77,16 @@ export default function TimeSlotMenu() {
           <span className="block text-xs text-ink-soft">營業時間：{HOURS_TEXT}</span>
         </p>
       )}
+      <a
+        href="/meeting-bento"
+        className="mb-4 flex items-center justify-between gap-3 rounded border border-brand bg-brand px-4 py-3 text-white"
+      >
+        <span>
+          <span className="block font-serif text-base font-bold">會議餐盒・均一價 $150</span>
+          <span className="block text-xs opacity-90">5 款葷素可選・前一天預約可外送・可開發票</span>
+        </span>
+        <span className="shrink-0 rounded bg-paper px-3 py-1.5 text-sm font-bold text-brand">看餐盒 →</span>
+      </a>
       <div role="tablist" aria-label="供餐時段" className="grid grid-cols-3 gap-2">
         {SLOTS.map((s) => {
           const active = s.id === selected;
