@@ -145,9 +145,18 @@ const DRINK_PHOTO: Record<string, string> = {
   復刻紅茶: "/menu/drink-classic-black-tea.jpg",
 };
 
+// 御食餐盒各品項實拍照（店家提供）
+const BENTO_PHOTO: Record<string, string> = {
+  "柚香炙燒豚御食盒": "/menu/bento-yuzu-pork.jpg",
+  "味噌照燒雞御食盒": "/menu/bento-miso-teriyaki-chicken.jpg",
+  "檸檬蜜汁豚御食盒": "/menu/bento-lemon-honey-pork.jpg",
+  "七味照燒雞御食盒": "/menu/bento-shichimi-chicken.jpg",
+};
+
 export function photoFor(categoryId: MenuCategory["id"], item: MenuItem): string | undefined {
   if (categoryId === "drinks") return DRINK_PHOTO[item.name];
   if (item.tags?.includes("vegan") || item.tags?.includes("veg-friendly")) return undefined;
+  if (categoryId === "bento" && BENTO_PHOTO[item.name]) return BENTO_PHOTO[item.name];
   return CATEGORY_PHOTO[categoryId];
 }
 
