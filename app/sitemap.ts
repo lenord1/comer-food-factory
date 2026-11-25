@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: SITE.siteUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE.siteUrl}/meeting-bento`, lastModified: now, changeFrequency: "monthly", priority: 0.95 },
+    { url: `${SITE.siteUrl}/guide/taipei-meeting-bento`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${SITE.siteUrl}/menu`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     ...DISHES.map((d) => ({
       url: `${SITE.siteUrl}/menu/${d.slug}`,

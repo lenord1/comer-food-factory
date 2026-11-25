@@ -210,6 +210,10 @@ export default function MeetingBentoPage() {
           </figure>
         </div>
 
+        <p className="mt-8 text-sm">
+          第一次訂？看看 <Link href="/guide/taipei-meeting-bento" className="font-bold text-brand underline">會議餐盒怎麼選</Link>。
+        </p>
+
         <section aria-labelledby="bentos" className="mt-12">
           <h2 id="bentos" className="font-serif text-2xl font-bold text-brand">5 款會議餐盒</h2>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">

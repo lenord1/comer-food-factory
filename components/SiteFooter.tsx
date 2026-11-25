@@ -17,6 +17,7 @@ export default function SiteFooter() {
               </li>
             ))}
             <li><Link href="/meeting-bento" className="hover:text-brand">台北會議餐盒訂購</Link></li>
+            <li><Link href="/guide/taipei-meeting-bento" className="hover:text-brand">會議餐盒怎麼選</Link></li>
             <li>
               <a href={SITE.lineUrl} target="_blank" rel="noopener noreferrer" className="hover:text-brand">
                 官方 LINE 訂餐
