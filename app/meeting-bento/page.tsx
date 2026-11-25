@@ -187,17 +187,26 @@ export default function MeetingBentoPage() {
           </div>
 
           <figure>
-            <div className="relative aspect-[4/3] overflow-hidden rounded border border-brand/15 bg-oat">
-              <Image
-                src="/menu/bento.jpg"
-                alt="摳門製研所御食餐盒示意圖"
-                fill
-                priority
-                sizes="(min-width: 768px) 22rem, 100vw"
-                className="object-cover"
-              />
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                ["/menu/bento-yuzu-pork.jpg", "柚香炙燒豚御食盒"],
+                ["/menu/bento-miso-teriyaki-chicken.jpg", "味噌照燒雞御食盒"],
+                ["/menu/bento-lemon-honey-pork.jpg", "檸檬蜜汁豚御食盒"],
+                ["/menu/bento-shichimi-chicken.jpg", "七味照燒雞御食盒"],
+              ].map(([src, name], i) => (
+                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded border border-brand/15 bg-oat">
+                  <Image
+                    src={src}
+                    alt={`${name}實拍`}
+                    fill
+                    priority={i === 0}
+                    sizes="(min-width: 768px) 11rem, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
             </div>
-            <figcaption className="mt-1.5 text-xs text-ink-soft">照片為示意，實際以現場供應為準</figcaption>
+            <figcaption className="mt-1.5 text-xs text-ink-soft">店內實拍，實際以現場供應為準</figcaption>
           </figure>
         </div>
 
